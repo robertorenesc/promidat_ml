@@ -1,10 +1,8 @@
 from method.GenericModel import GenericModel
 
-from sklearn.ensemble import AdaBoostClassifier
-import matplotlib.pyplot as plt
-import numpy  as np
+from sklearn.ensemble import RandomForestClassifier 
 
-class ADABoostingModel(GenericModel):
+class RandomForestModel(GenericModel):
 
     def __init__(self, data):
         super().__init__(data)
@@ -14,10 +12,9 @@ class ADABoostingModel(GenericModel):
             raise Exception("The model should be built before training")
         
         # Reading the parameters from the dictionary
-        algorithm = self.read_parameter(metadata, "algorithm", "SAMME.R")
-        n_estimators = self.read_parameter(metadata, "n_estimators", 50)
+        n_estimators = self.read_parameter(metadata, "n_estimators", 100)
         
-        self.classifier_instance = AdaBoostClassifier(algorithm=algorithm, n_estimators=n_estimators, random_state=0)
+        self.classifier_instance = RandomForestClassifier(n_estimators = n_estimators, random_state=0)
         self.classifier_instance.fit(self.X_train,self.y_train.iloc[:,0].values)
         self.prediction = self.classifier_instance.predict(self.X_test)
 
