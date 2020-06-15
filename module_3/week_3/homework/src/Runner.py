@@ -4,6 +4,9 @@ from method.RandomForestModel import RandomForestModel
 from method.ADABoostingModel import ADABoostingModel
 from method.XGBoostingModel import XGBoostingModel
 from sklearn.model_selection import train_test_split
+import numpy as np
+from sklearn.metrics import confusion_matrix
+from method.ModelIndexCalculator import IndexesCalculator
 
 from method.ConcensoPropio import ConcensoPropio
 
@@ -22,6 +25,8 @@ class Runner:
         X_train, X_test, y_train, y_test = train_test_split(X, Y, train_size = 0.7, random_state = 0)
         model = ConcensoPropio()
         model.fit(X_train = X_train, y_train = y_train)
+        model.predict(X_test, y_test)
+        model.print_indexes_info()
 
     @staticmethod
     def ejercicion_1():
